@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>ExampleAddon</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>ExampleAddon</name>
+
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Paper API -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--
+          RandomWeaponWar 본체 — JitPack을 통해 GitHub 저장소에서 직접 받아온다.
+          jar 파일을 따로 주고받거나 로컬 저장소에 수동 등록할 필요가 없다.
+
+          https://github.com/LunaEunha/RandomWeaponWar 의 태그 v1.0.0 기준.
+          새 버전을 쓰고 싶으면 저장소에 새 태그를 찍고 version 만 그 태그명으로 바꾸면 됩니다.
+        -->
+        <dependency>
+            <groupId>com.github.LunaEunha</groupId>
+            <artifactId>RandomWeaponWar</artifactId>
+            <version>v1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>${java.version}</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
