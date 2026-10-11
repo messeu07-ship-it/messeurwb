@@ -101,7 +101,7 @@ public class Circularbeads implements BaseWeapon, Listener{
 
         slow = cfg.getInt("addons.circularbeads.slow", 2);
         fatigue = cfg.getInt("addons.circularbeads.fatigue", 2);
-        debuffduration = cfg.getInt("addons.circularbeads.debuffduration", 3);
+        debuffduration = cfg.getInt("addons.circularbeads.debuffduration", 4);
 
         damage = cfg.getInt("addons.circularbeads.damage", 5);
 
@@ -125,16 +125,16 @@ public class Circularbeads implements BaseWeapon, Listener{
        .append(Component.text("사용할 때마다 다음 순서대로 효과가 변경됩니다.")
                         .color(NamedTextColor.GRAY)));
         lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)
-        		.append(Component.text("1. 구속 " + slow + ", 채굴 피로 " + fatigue + "를 " + debuffduration + "초 부여하는 투사체를 발사합니다.")
+        		.append(Component.text("    1. 구속 " + slow + ", 채굴 피로 " + fatigue + "를 " + debuffduration + "초 부여하는 투사체를 발사합니다.")
                 .color(NamedTextColor.GRAY)));
         lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)
-        		.append(Component.text("2. " + damage + "의 피해를 주는 투사체를 발사합니다.")
+        		.append(Component.text("    2. " + damage + "의 피해를 주는 투사체를 발사합니다.")
                 .color(NamedTextColor.GRAY)));
         lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)
-        		.append(Component.text("3. " + "자신에게 재생 " + regeneration + ", 신속 " + speed + "를 " + buffduration + "초 부여합니다.")
+        		.append(Component.text("    3. " + "자신에게 재생 " + regeneration + ", 신속 " + speed + "를 " + buffduration + "초 부여합니다.")
                 .color(NamedTextColor.GRAY)));
         lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)
-        		.append(Component.text("3번째 효과 이후에는 1번째 효과로 돌아옵니다.")
+        		.append(Component.text("    3번째 효과 이후에는 1번째 효과로 돌아옵니다.")
                 .color(NamedTextColor.GRAY)));
         lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("『C』 ").color(NamedTextColor.DARK_GRAY))
