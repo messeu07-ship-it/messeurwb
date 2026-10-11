@@ -17,6 +17,7 @@ public class MesseuAddonMain implements RwwAddon {
     public List<BaseWeapon> createWeapons(RandomWeaponWar plugin, CooldownManager cooldownManager) {
         return List.of(
                 new Powerdrain(plugin, cooldownManager),
+                new Circularbeads(plugin, cooldownManager),
                 new DestroyPhenomenon(plugin, cooldownManager)
         );
     }
