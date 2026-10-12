@@ -101,7 +101,7 @@ public class Powerdrain implements BaseWeapon {
         );
 
         decreaseheal = cfg.getInt(
-                "addons.powerdrain.decreaseheal", 2
+                "addons.powerdrain.decreaseheal", 3
         );
 
         range = cfg.getDouble(
@@ -176,7 +176,7 @@ public class Powerdrain implements BaseWeapon {
                                         + "나약함의 지속시간이 "
                                         + decreaseduration + "초, "
                                         + "회복량이 " + decreaseheal
-                                        + "로 감소합니다."
+                                        + "으로 감소합니다."
                                 ).color(NamedTextColor.GRAY)
                         )
         );

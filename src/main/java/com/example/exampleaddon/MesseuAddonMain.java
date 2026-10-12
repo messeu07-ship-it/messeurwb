@@ -18,6 +18,10 @@ public class MesseuAddonMain implements RwwAddon {
         return List.of(
                 new Powerdrain(plugin, cooldownManager),
                 new Circularbeads(plugin, cooldownManager),
+                new Swordpiecebox(plugin, cooldownManager),
+                new XAccuracy(plugin, cooldownManager),
+                new Balloonarmor(plugin),
+                new PoPiPo(plugin),
                 new DestroyPhenomenon(plugin, cooldownManager)
         );
     }
@@ -26,6 +30,8 @@ public class MesseuAddonMain implements RwwAddon {
     public String getName() {
         return "MesseuAddon";
     }
+    
+    
     
     
 }

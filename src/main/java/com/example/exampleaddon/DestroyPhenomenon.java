@@ -56,7 +56,7 @@ public class DestroyPhenomenon implements BaseWeapon{
         	attackDamage = cfg.getDouble("addons.destroyphenomenon.attack-damage", 3);
         	attackSpeed  = cfg.getDouble("addons.destroyphenomenon.attack-speed", -1);
             range        = cfg.getDouble("addons.destroyphenomenon.range", 8.0);
-            cooldownMs   = cfg.getLong("addons.destroyphenomenon.cooldown", 15) * 1000L;
+            cooldownMs   = cfg.getLong("addons.destroyphenomenon.cooldown", 10) * 1000L;
  }
     
     @Override
