@@ -22,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffectType;
 
 import com.randomweaponwar.RandomWeaponWar;
 import com.randomweaponwar.weapons.BaseWeapon;
@@ -124,7 +125,7 @@ public class Balloonarmor implements BaseWeapon, Listener{
 	
 	@EventHandler
 	private void ondamage(EntityDamageEvent event) {
-		if (event.getEntity() instanceof Player p && isWearing(p)) {
+		if (event.getEntity() instanceof Player p && isWearing(p) && !p.hasPotionEffect(PotionEffectType.HUNGER)) {
 			event.setDamage(event.getDamage() * (1 + (((double) increasedamage) / 100.0)));
 		}
 	}

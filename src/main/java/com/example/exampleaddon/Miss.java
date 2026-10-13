@@ -21,6 +21,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffectType;
 
 import com.randomweaponwar.RandomWeaponWar;
 import com.randomweaponwar.weapons.BaseWeapon;
@@ -184,7 +185,7 @@ public class Miss implements BaseWeapon, Listener{
     
     @EventHandler
 	private void ondamage2(EntityDamageByEntityEvent event) {
-		if (!event.isCancelled() && event.getDamager() instanceof Player p && isMainHand(p)) {
+		if (!event.isCancelled() && event.getDamager() instanceof Player p && isMainHand(p) && !p.hasPotionEffect(PotionEffectType.HUNGER)) {
 			if (Math.random() < ((double) misspercent) / 100.0) {
 				event.setCancelled(true);
 				 p.sendMessage(

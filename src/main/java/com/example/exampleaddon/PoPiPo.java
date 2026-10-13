@@ -72,7 +72,7 @@ public class PoPiPo implements BaseWeapon, Listener {
             @Override
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    if (isMainHand(player)) {
+                    if (isMainHand(player) && !player.hasPotionEffect(PotionEffectType.HUNGER)) {
                         startTask(player);
                     } else {
                         stopTask(player);
@@ -242,7 +242,7 @@ public class PoPiPo implements BaseWeapon, Listener {
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
-                if (!player.isOnline() || !isMainHand(player)) {
+                if (!player.isOnline() || !isMainHand(player) || player.hasPotionEffect(PotionEffectType.HUNGER)) {
                     stopTask(player);
                     return;
                 }
@@ -265,7 +265,7 @@ public class PoPiPo implements BaseWeapon, Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!player.isOnline() || !isMainHand(player)) {
+                if (!player.isOnline() || !isMainHand(player) || player.hasPotionEffect(PotionEffectType.HUNGER)) {
                     stopTask(player);
                     return;
                 }

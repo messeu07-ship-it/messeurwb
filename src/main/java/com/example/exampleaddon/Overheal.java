@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.randomweaponwar.RandomWeaponWar;
@@ -70,7 +71,7 @@ public class Overheal implements BaseWeapon, Listener {
                             player.getInventory().getItemInMainHand();
 
                     // 주 손에 초과회복이 없으면 진행 시간 초기화
-                    if (!isWeaponItem(mainHand)) {
+                    if (!isWeaponItem(mainHand) || player.hasPotionEffect(PotionEffectType.HUNGER)) {
                         tickCounters.remove(uuid);
                         continue;
                     }
@@ -200,7 +201,7 @@ public class Overheal implements BaseWeapon, Listener {
                         )
                         .append(
                                 Component.text(
-                                        "체력이 최대인 상태에서 "
+                                        "체력이 최대치인 상태에서 "
                                                 + formatNumber(intervalSeconds)
                                                 + "초마다 흡수 체력을 "
                                                 + formatNumber(absorptionPerInterval)
