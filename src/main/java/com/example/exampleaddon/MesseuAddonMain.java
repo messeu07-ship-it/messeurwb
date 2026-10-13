@@ -22,6 +22,8 @@ public class MesseuAddonMain implements RwwAddon {
                 new XAccuracy(plugin, cooldownManager),
                 new Balloonarmor(plugin),
                 new PoPiPo(plugin),
+                new Overheal(plugin),
+                new Miss(plugin),
                 new DestroyPhenomenon(plugin, cooldownManager)
         );
     }

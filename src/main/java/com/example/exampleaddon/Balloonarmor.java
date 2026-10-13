@@ -12,6 +12,7 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -31,7 +32,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 
-public class Balloonarmor implements BaseWeapon{
+public class Balloonarmor implements BaseWeapon, Listener{
 	
 	private final RandomWeaponWar plugin;
     private final NamespacedKey itemKey;
@@ -43,13 +44,14 @@ public class Balloonarmor implements BaseWeapon{
         this.plugin = plugin;
         this.itemKey = new NamespacedKey(plugin, "Balloonarmor_item");
         loadConfig();
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
     
     @Override
     public void loadConfig() {
         FileConfiguration cfg = plugin.getConfig();
-        health = cfg.getDouble("addons.Balloonarmor.health", 20.0);
-        increasedamage  = cfg.getInt("addons.Balloonarmor.increasedamage", 30);
+        health = cfg.getDouble("addons.Balloonarmor.health", 40.0);
+        increasedamage  = cfg.getInt("addons.Balloonarmor.increasedamage", 80);
  }
     
     @Override
@@ -117,7 +119,7 @@ public class Balloonarmor implements BaseWeapon{
 	}
 	
 	private boolean isWearing(Player player) {
-        return this.isWeaponItem(player.getInventory().getHelmet());
+        return this.isWeaponItem(player.getInventory().getChestplate());
     }
 	
 	@EventHandler

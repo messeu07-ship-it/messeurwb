@@ -45,8 +45,13 @@ public class PoPiPo implements BaseWeapon, Listener {
     // 지속 시간 3틱, 구속 39단계
     private final PotionEffect slow = new PotionEffect(
             PotionEffectType.SLOW,
-            3,
-            38
+            2,
+            5
+    );
+    private final PotionEffect speed = new PotionEffect(
+            PotionEffectType.SPEED,
+            2,
+            5
     );
 
     // 플레이어별 패시브 작업
@@ -74,7 +79,7 @@ public class PoPiPo implements BaseWeapon, Listener {
                     }
                 }
             }
-        }.runTaskTimer(plugin, 1L, 1L);
+        }.runTaskTimer(plugin, 0L, 0L);
     }
 
     @Override
@@ -148,7 +153,7 @@ public class PoPiPo implements BaseWeapon, Listener {
                         )
                         .append(
                                 Component.text(
-                                        "3틱마다 3틱 동안 구속 39를 부여받습니다."
+                                        "2틱마다 신속 5와 구속 5를 번갈아 부여받습니다."
                                 ).color(NamedTextColor.GRAY)
                         )
         );
@@ -242,13 +247,38 @@ public class PoPiPo implements BaseWeapon, Listener {
                     return;
                 }
 
-                // 자신에게 구속 39 부여
+                
                 player.addPotionEffect(slow);
+                speedtask(player);
             }
-        }.runTaskTimer(plugin, 0L, 6L);
+        }.runTaskTimer(plugin, 0L, 4L);
 
         tasks.put(uuid, task);
     }
+    
+    public void speedtask(Player player) {
+
+        if (!player.isOnline() || !isMainHand(player)) {
+            return;
+        }
+        
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!player.isOnline() || !isMainHand(player)) {
+                    stopTask(player);
+                    return;
+                }
+
+                
+                player.addPotionEffect(speed);
+                return;
+            }
+        }.runTaskTimer(plugin, 2L, 4L);
+        
+        
+    }
+    
 
     // 패시브 작업 중지
     public void stopTask(Player player) {
@@ -260,6 +290,8 @@ public class PoPiPo implements BaseWeapon, Listener {
             task.cancel();
         }
     }
+    
+    
 
     // 다른 클래스에서 작업 상태를 확인할 때 사용
     public boolean hasTask(Player player) {
