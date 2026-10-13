@@ -75,7 +75,7 @@ public class Balloonarmor implements BaseWeapon, Listener{
         armorMeta.setColor(Color.fromRGB(37,224,252)); 
         item.setItemMeta(armorMeta);
         
-        Component displayName = ((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)Component.empty().decoration(TextDecoration.ITALIC, false)).append(((TextComponent)Component.text("[ ").color(NamedTextColor.DARK_GRAY)).decorate(TextDecoration.BOLD))).append(((TextComponent)Component.text("C").color(NamedTextColor.YELLOW)).decorate(TextDecoration.BOLD))).append(((TextComponent)Component.text(" ] ").color(NamedTextColor.DARK_GRAY)).decorate(TextDecoration.BOLD))).append(Component.text("풍선갑옷").color(TextColor.color(37,224,252)).decoration(TextDecoration.BOLD, true))))));
+        Component displayName = ((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)((TextComponent)Component.empty().decoration(TextDecoration.ITALIC, false)).append(((TextComponent)Component.text("[ ").color(NamedTextColor.DARK_GRAY)).decorate(TextDecoration.BOLD))).append(((TextComponent)Component.text("D").color(NamedTextColor.GRAY)).decorate(TextDecoration.BOLD))).append(((TextComponent)Component.text(" ] ").color(NamedTextColor.DARK_GRAY)).decorate(TextDecoration.BOLD))).append(Component.text("풍선갑옷").color(TextColor.color(37,224,252)).decoration(TextDecoration.BOLD, true))))));
         meta.displayName(displayName);
         List<Component> lore = new ArrayList<>();
         lore.add(

@@ -258,7 +258,7 @@ public class Swordpiecebox implements BaseWeapon, Listener {
         ItemMeta meta = piece.getItemMeta();
 
         meta.displayName(
-                Component.text("칼날 조각")
+                Component.text("칼날조각")
                         .color(TextColor.color(186, 216, 203))
                         .decoration(TextDecoration.ITALIC, false)
                         .decorate(TextDecoration.BOLD)
@@ -353,7 +353,7 @@ public class Swordpiecebox implements BaseWeapon, Listener {
 
         if (high <= 0) {
             player.sendMessage(
-                    Component.text("지급할 칼날 조각 개수가 없습니다.")
+                    Component.text("지급할 칼날조각 개수가 없습니다.")
                             .color(NamedTextColor.RED)
             );
             return;
@@ -401,7 +401,7 @@ public class Swordpiecebox implements BaseWeapon, Listener {
 
         player.sendMessage(
                 Component.text(
-                        "칼날 조각 " + amount + "개를 획득했습니다."
+                        "칼날조각 " + amount + "개를 획득했습니다."
                 ).color(NamedTextColor.GREEN)
         );
 
