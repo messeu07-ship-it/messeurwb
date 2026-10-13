@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffectType;
 
 import com.randomweaponwar.RandomWeaponWar;
 import com.randomweaponwar.managers.CooldownManager;
@@ -426,7 +427,7 @@ public class Swordpiecebox implements BaseWeapon, Listener {
 
         ItemStack weapon = player.getInventory().getItemInMainHand();
 
-        if (weapon.getType() != Material.IRON_NUGGET) {
+        if (weapon.getType() != Material.IRON_NUGGET || player.hasPotionEffect(PotionEffectType.HUNGER)) {
             return;
         }
 
