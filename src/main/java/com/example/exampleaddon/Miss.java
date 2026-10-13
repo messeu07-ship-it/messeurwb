@@ -176,7 +176,6 @@ public class Miss implements BaseWeapon, Listener{
         // 패시브 무기이므로 우클릭 기능 없음
     }
 
-    // 주 손에 폿핏포를 들고 있는지 확인
     private boolean isMainHand(Player player) {
         return isWeaponItem(
                 player.getInventory().getItemInMainHand()

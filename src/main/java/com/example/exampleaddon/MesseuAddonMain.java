@@ -24,6 +24,7 @@ public class MesseuAddonMain implements RwwAddon {
                 new PoPiPo(plugin),
                 new Overheal(plugin),
                 new Miss(plugin),
+                new HighJumpKick(plugin),
                 new DestroyPhenomenon(plugin, cooldownManager)
         );
     }

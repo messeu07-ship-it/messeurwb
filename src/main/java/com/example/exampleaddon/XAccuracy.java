@@ -122,7 +122,7 @@ public class XAccuracy implements BaseWeapon {
         List<Component> lore = new ArrayList<>();
         lore.add(Component.empty().decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("『R』 ").color(NamedTextColor.DARK_GRAY))
-       .append(Component.text(minimumrange + "칸 이상 떨어진 " + maximumrange + "칸 내의 바라본 대상에게 " + damage + "의 피해를 줍니다.")
+       .append(Component.text(minimumrange + "칸 이상 떨어진 " + maximumrange + "칸 내 바라본 대상에게 " + damage + "의 피해를 줍니다.")
                         .color(NamedTextColor.GRAY)));
         lore.add(
                 Component.empty()

@@ -158,7 +158,7 @@ public class Powerdrain implements BaseWeapon {
                         )
                         .append(
                                 Component.text(
-                                        range + "칸 내 바라보는 대상에게 "
+                                        range + "칸 내 바라본 대상에게 "
                                         + duration + "초간 나약함 "
                                         + weakness + "를 부여하고 "
                                         + "자신은 " + heal
