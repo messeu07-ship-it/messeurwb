@@ -2,7 +2,6 @@ package com.example.exampleaddon;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import org.bukkit.Material;
