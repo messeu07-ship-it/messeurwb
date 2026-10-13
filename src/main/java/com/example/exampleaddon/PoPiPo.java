@@ -79,7 +79,7 @@ public class PoPiPo implements BaseWeapon, Listener {
                     }
                 }
             }
-        }.runTaskTimer(plugin, 0L, 0L);
+        }.runTaskTimer(plugin, 0L, 1L);
     }
 
     @Override
@@ -226,7 +226,7 @@ public class PoPiPo implements BaseWeapon, Listener {
         );
     }
 
-    // 패시브 작업 시작
+ // 패시브 작업 시작
     public void startTask(Player player) {
         UUID uuid = player.getUniqueId();
 
@@ -240,43 +240,28 @@ public class PoPiPo implements BaseWeapon, Listener {
         }
 
         BukkitTask task = new BukkitRunnable() {
+            private boolean applySlow = true;
+
             @Override
             public void run() {
-                if (!player.isOnline() || !isMainHand(player) || player.hasPotionEffect(PotionEffectType.HUNGER)) {
+                if (!player.isOnline()
+                        || !isMainHand(player)
+                        || player.hasPotionEffect(PotionEffectType.HUNGER)) {
                     stopTask(player);
                     return;
                 }
 
-                
-                player.addPotionEffect(slow);
-                speedtask(player);
+                if (applySlow) {
+                    player.addPotionEffect(slow);
+                } else {
+                    player.addPotionEffect(speed);
+                }
+
+                applySlow = !applySlow;
             }
-        }.runTaskTimer(plugin, 0L, 4L);
+        }.runTaskTimer(plugin, 0L, 2L);
 
         tasks.put(uuid, task);
-    }
-    
-    public void speedtask(Player player) {
-
-        if (!player.isOnline() || !isMainHand(player)) {
-            return;
-        }
-        
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (!player.isOnline() || !isMainHand(player) || player.hasPotionEffect(PotionEffectType.HUNGER)) {
-                    stopTask(player);
-                    return;
-                }
-
-                
-                player.addPotionEffect(speed);
-                return;
-            }
-        }.runTaskTimer(plugin, 2L, 4L);
-        
-        
     }
     
 
