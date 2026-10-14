@@ -18,6 +18,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
@@ -55,10 +56,10 @@ public class HighJumpKick implements BaseWeapon, Listener{
     @Override
     public void loadConfig() {
         FileConfiguration cfg = plugin.getConfig();
-        	attackDamage = cfg.getDouble("addons.HighJumpKick.attack-damage", 9);
+        	attackDamage = cfg.getDouble("addons.HighJumpKick.attack-damage", 10);
         	attackSpeed  = cfg.getDouble("addons.HighJumpKick.attack-speed", -1);
-        	misspercent  = cfg.getInt("addons.HighJumpKick.miss-percent", 20);
-        	penaltydamage = cfg.getDouble("addons.HighJumpKick.penalty-damage", 20.0);
+        	misspercent  = cfg.getInt("addons.HighJumpKick.miss-percent", 15);
+        	penaltydamage = cfg.getDouble("addons.HighJumpKick.penalty-damage", 15.0);
     	}
     
     @Override
@@ -262,6 +263,7 @@ public class HighJumpKick implements BaseWeapon, Listener{
     @SuppressWarnings("deprecation")
 	@EventHandler
 	private void ondamage2(EntityDamageByEntityEvent event) {
+    	if (event.getCause() == DamageCause.ENTITY_ATTACK) {
 		if (event.getDamager() instanceof Player p && isMainHand(p) && !p.hasPotionEffect(PotionEffectType.HUNGER)) {
 			if (Math.random() < ((double) misspercent) / 100.0) {
 				event.setCancelled(true);
@@ -275,6 +277,7 @@ public class HighJumpKick implements BaseWeapon, Listener{
 		            );
 				 p.damage(penaltydamage);
 			}
+		}
 		}
 	}
 

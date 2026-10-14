@@ -105,11 +105,11 @@ public class Swordpiecebox implements BaseWeapon, Listener {
         );
 
         maximum = cfg.getInt(
-                "addons.swordpiecebox.maximum", 3
+                "addons.swordpiecebox.maximum", 2
         );
 
         cooldownMs = cfg.getLong(
-                "addons.swordpiecebox.cooldown", 10
+                "addons.swordpiecebox.cooldown", 15
         ) * 1000L;
     }
 
@@ -289,7 +289,7 @@ public class Swordpiecebox implements BaseWeapon, Listener {
                 new AttributeModifier(
                         DAMAGE_MODIFIER_ID,
                         "Swordpiece_attack_damage",
-                        4.0,
+                        3.5,
                         AttributeModifier.Operation.ADD_NUMBER,
                         EquipmentSlot.HAND
                 )

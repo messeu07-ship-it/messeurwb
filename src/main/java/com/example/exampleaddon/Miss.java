@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -184,6 +185,7 @@ public class Miss implements BaseWeapon, Listener{
     
     @EventHandler
 	private void ondamage2(EntityDamageByEntityEvent event) {
+    	if (event.getCause() == DamageCause.ENTITY_ATTACK) {
 		if (!event.isCancelled() && event.getDamager() instanceof Player p && isMainHand(p) && !p.hasPotionEffect(PotionEffectType.HUNGER)) {
 			if (Math.random() < ((double) misspercent) / 100.0) {
 				event.setCancelled(true);
@@ -197,6 +199,7 @@ public class Miss implements BaseWeapon, Listener{
 			}
 		}
 	}
+    }
 
     
     
