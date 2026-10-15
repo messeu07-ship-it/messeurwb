@@ -52,7 +52,7 @@ public class Miss implements BaseWeapon, Listener{
         FileConfiguration cfg = plugin.getConfig();
         	attackDamage = cfg.getDouble("addons.Miss.attack-damage", 6);
         	attackSpeed  = cfg.getDouble("addons.Miss.attack-speed", -2);
-        	misspercent  = cfg.getInt("addons.Miss.miss-percent", 30);
+        	misspercent  = cfg.getInt("addons.Miss.miss-percent", 25);
     	}
     
     @Override

@@ -1,9 +1,7 @@
 package com.example.exampleaddon;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Material;
@@ -44,7 +42,7 @@ public class HighJumpKick implements BaseWeapon, Listener{
     private double attackSpeed;
     private int misspercent;
     private double penaltydamage;
-    private final Map<UUID, Boolean> tasks = new HashMap<>();
+    private final List<UUID> tasks = new ArrayList<>();
     
     public HighJumpKick(RandomWeaponWar plugin) {
         this.plugin = plugin;
@@ -203,7 +201,6 @@ public class HighJumpKick implements BaseWeapon, Listener{
         );
     }
     
-    @SuppressWarnings("deprecation")
 	@EventHandler
     private void onPlayerInteract(PlayerInteractEvent e) {
     	
@@ -213,7 +210,6 @@ public class HighJumpKick implements BaseWeapon, Listener{
             return;
         }
 
-        // 좌클릭만 처리
         Action action = e.getAction();
 
         if (action != Action.LEFT_CLICK_AIR
@@ -223,63 +219,59 @@ public class HighJumpKick implements BaseWeapon, Listener{
 
         Player player = e.getPlayer();
 
-        // 주 손에 무릎차기를 들고 있고 허기 효과가 없을 때만 실행
-        
-        if (tasks.get(player.getUniqueId()) == null) {
-    		tasks.put(e.getPlayer().getUniqueId(), false);
-    		}
-
         if (!isMainHand(player)
                 || player.hasPotionEffect(PotionEffectType.HUNGER)
-                || tasks.get(player.getUniqueId())) {
+                || tasks.contains(player.getUniqueId())) {
             return;
-        }	
-        e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENTITY_PLAYER_BIG_FALL, SoundCategory.PLAYERS, 1.0f, 1.3f);
-    		e.getPlayer().sendMessage(
-                    Component.text(
-                            e.getPlayer().getPlayerListName() + "은(는) 의욕이 넘쳐서 땅에 부딪쳤다!"
-                    ).color(NamedTextColor.GRAY)
-            );
-    		e.getPlayer().damage(penaltydamage);      		
+        }	  		
     		
-    		tasks.put(e.getPlayer().getUniqueId(), true);
+    		tasks.add(player.getUniqueId());
     		new BukkitRunnable() {
     			
     			@Override
-				public void run() {		
-    				what(e.getPlayer());
+				public void run() {	
+    				if (tasks.contains(player.getUniqueId())) {
+    					penalty(player);
+    					what(player);
+    				}
 					cancel();
 					return;
 				}				
 				
 				
-    		}.runTaskTimer(plugin, 2L, 2L);  		
+    		}.runTaskTimer(plugin, 1L, 1L);  		
     	}
     
     private void what(Player p) {
-    	tasks.put(p.getUniqueId(), false);   
+    	tasks.remove(p.getUniqueId());   
     }
     
-    @SuppressWarnings("deprecation")
+
 	@EventHandler
 	private void ondamage2(EntityDamageByEntityEvent event) {
     	if (event.getCause() == DamageCause.ENTITY_ATTACK) {
 		if (event.getDamager() instanceof Player p && isMainHand(p) && !p.hasPotionEffect(PotionEffectType.HUNGER)) {
+			what(p);
 			if (Math.random() < ((double) misspercent) / 100.0) {
 				event.setCancelled(true);
 			}
 			if (event.isCancelled()) {
-				p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_BIG_FALL, SoundCategory.PLAYERS, 1.0f, 1.3f);
-				 p.sendMessage(
-		                    Component.text(
-		                    		 p.getPlayerListName() + "은(는) 의욕이 넘쳐서 땅에 부딪쳤다!"
-		                    ).color(NamedTextColor.GRAY)
-		            );
-				 p.damage(penaltydamage);
+				penalty(p);
 			}
 		}
 		}
 	}
+    
+    @SuppressWarnings("deprecation")
+    private void penalty(Player p) {
+    	p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_BIG_FALL, SoundCategory.PLAYERS, 1.0f, 1.3f);
+		 p.sendMessage(
+                   Component.text(
+                   		 p.getPlayerListName() + "은(는) 의욕이 넘쳐서 땅에 부딪쳤다!"
+                   ).color(NamedTextColor.GRAY)
+           );
+		 p.damage(penaltydamage);
+    }
 
 	
 }
