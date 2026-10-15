@@ -1,7 +1,9 @@
 package com.example.exampleaddon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Material;
@@ -13,6 +15,7 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -43,6 +46,7 @@ public class HighJumpKick implements BaseWeapon, Listener{
     private int misspercent;
     private double penaltydamage;
     private final List<UUID> tasks = new ArrayList<>();
+    private final Map<UUID, Boolean> indi = new HashMap<>();
     
     public HighJumpKick(RandomWeaponWar plugin) {
         this.plugin = plugin;
@@ -201,7 +205,7 @@ public class HighJumpKick implements BaseWeapon, Listener{
         );
     }
     
-	@EventHandler
+	@EventHandler (priority = EventPriority.NORMAL)
     private void onPlayerInteract(PlayerInteractEvent e) {
     	
     	
@@ -221,56 +225,62 @@ public class HighJumpKick implements BaseWeapon, Listener{
 
         if (!isMainHand(player)
                 || player.hasPotionEffect(PotionEffectType.HUNGER)
-                || tasks.contains(player.getUniqueId())) {
+                ) {
             return;
         }	  		
     		
-    		tasks.add(player.getUniqueId());
-    		new BukkitRunnable() {
-    			
-    			@Override
-				public void run() {	
-    				if (tasks.contains(player.getUniqueId())) {
-    					penalty(player);
-    					what(player);
-    				}
-					cancel();
-					return;
-				}				
-				
-				
-    		}.runTaskTimer(plugin, 1L, 1L);  		
+        if (indi.get(player.getUniqueId()) != null) {
+        	if (indi.get(player.getUniqueId())) return;
+        }
+    		penalty(player);
+    		
     	}
     
-    private void what(Player p) {
-    	tasks.remove(p.getUniqueId());   
-    }
-    
-
-	@EventHandler
+	@EventHandler (priority = EventPriority.HIGH)
 	private void ondamage2(EntityDamageByEntityEvent event) {
     	if (event.getCause() == DamageCause.ENTITY_ATTACK) {
 		if (event.getDamager() instanceof Player p && isMainHand(p) && !p.hasPotionEffect(PotionEffectType.HUNGER)) {
-			what(p);
+			indi.put(p.getUniqueId(), true); 
 			if (Math.random() < ((double) misspercent) / 100.0) {
 				event.setCancelled(true);
 			}
 			if (event.isCancelled()) {
 				penalty(p);
 			}
-		}
+			indiset(p);
+		}		
 		}
 	}
-    
+	
+	@EventHandler (priority = EventPriority.LOWEST)
+	private void indiset(Player p) {
+		indi.put(p.getUniqueId(), false); 
+	}
+	
     @SuppressWarnings("deprecation")
     private void penalty(Player p) {
+    	if (tasks.contains(p.getUniqueId())) return;
+    	tasks.add(p.getUniqueId());
     	p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_BIG_FALL, SoundCategory.PLAYERS, 1.0f, 1.3f);
-		 p.sendMessage(
-                   Component.text(
-                   		 p.getPlayerListName() + "은(는) 의욕이 넘쳐서 땅에 부딪쳤다!"
-                   ).color(NamedTextColor.GRAY)
-           );
-		 p.damage(penaltydamage);
+		p.sendMessage(
+               Component.text(
+               		 p.getPlayerListName() + "은(는) 의욕이 넘쳐서 땅에 부딪쳤다!"
+               ).color(NamedTextColor.GRAY)
+       );
+	 p.damage(penaltydamage);
+    	new BukkitRunnable() {
+			
+			@Override
+			public void run() {	
+				tasks.remove(p.getUniqueId());   
+				cancel();
+				return;
+				
+			}				
+			
+			
+		}.runTaskTimer(plugin, 1L, 1L);	
+    	
     }
 
 	
