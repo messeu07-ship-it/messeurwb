@@ -25,6 +25,7 @@ public class MesseuAddonMain implements RwwAddon {
                 new Overheal(plugin),
                 new Miss(plugin),
                 new HighJumpKick(plugin),
+                new Deceptionprison(plugin, cooldownManager),
                 new DestroyPhenomenon(plugin, cooldownManager)
         );
     }

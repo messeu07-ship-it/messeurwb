@@ -290,7 +290,7 @@ public class Powerdrain implements BaseWeapon {
         userTarget.put(uuid, targetUuid);
 
         // 흡수 사운드
-        player.playSound(
+        player.getWorld().playSound(
                 player.getLocation(),
                 Sound.ENTITY_GENERIC_DRINK,
                 SoundCategory.PLAYERS,

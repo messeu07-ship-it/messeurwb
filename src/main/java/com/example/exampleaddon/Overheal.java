@@ -262,4 +262,9 @@ public class Overheal implements BaseWeapon, Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         tickCounters.remove(event.getPlayer().getUniqueId());
     }
+    
+    @Override
+    public void clearPlayer(Player player) {
+        player.setAbsorptionAmount(0);
+    }
 }

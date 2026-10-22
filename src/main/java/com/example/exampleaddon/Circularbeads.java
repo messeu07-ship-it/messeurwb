@@ -177,17 +177,17 @@ public class Circularbeads implements BaseWeapon, Listener{
             case 1:
                 // 구속 및 채굴 피로 투사체
                 launchBead(player, (byte) 1);
-                player.playSound(player.getLocation(), Sound.ENTITY_WITHER_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 break;
 
             case 2:
                 // 데미지 투사체
                 launchBead(player, (byte) 2);
-                player.playSound(player.getLocation(), Sound.ENTITY_BLAZE_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_BLAZE_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 break;
 
             case 3:
-            	player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            	player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 player.addPotionEffect(new PotionEffect(
                         PotionEffectType.REGENERATION,
                         buffduration * 20,

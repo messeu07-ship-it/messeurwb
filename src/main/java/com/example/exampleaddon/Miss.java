@@ -195,7 +195,7 @@ public class Miss implements BaseWeapon, Listener{
 		                    ).color(NamedTextColor.GRAY)
 		            );
 				 p.getWorld().spawnParticle(Particle.SWEEP_ATTACK, event.getEntity().getLocation().clone().add(0, 1, 0), 1);
-				 p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1.0f, 1.5f);
+				 p.getWorld().playSound(p.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1.0f, 1.5f);
 			}
 		}
 	}

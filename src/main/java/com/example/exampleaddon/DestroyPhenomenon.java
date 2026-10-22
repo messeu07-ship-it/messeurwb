@@ -121,7 +121,7 @@ public class DestroyPhenomenon implements BaseWeapon{
             return;
         }
         
-        player.playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 1.0f, 0.5f);
+        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 1.0f, 0.5f);
         
         cooldownManager.setCooldown(getId(), uuid, cooldownMs);
         

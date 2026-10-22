@@ -247,13 +247,13 @@ public class HighJumpKick implements BaseWeapon, Listener{
 			if (event.isCancelled()) {
 				penalty(p);
 			}
-			indiset(p);
+			indiset(event, p);
 		}		
 		}
 	}
 	
 	@EventHandler (priority = EventPriority.LOWEST)
-	private void indiset(Player p) {
+	private void indiset(EntityDamageByEntityEvent event, Player p) {
 		indi.put(p.getUniqueId(), false); 
 	}
 	
@@ -261,7 +261,7 @@ public class HighJumpKick implements BaseWeapon, Listener{
     private void penalty(Player p) {
     	if (tasks.contains(p.getUniqueId())) return;
     	tasks.add(p.getUniqueId());
-    	p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_BIG_FALL, SoundCategory.PLAYERS, 1.0f, 1.3f);
+    	p.getWorld().playSound(p.getLocation(), Sound.ENTITY_PLAYER_BIG_FALL, SoundCategory.PLAYERS, 1.0f, 1.3f);
 		p.sendMessage(
                Component.text(
                		 p.getPlayerListName() + "은(는) 의욕이 넘쳐서 땅에 부딪쳤다!"
